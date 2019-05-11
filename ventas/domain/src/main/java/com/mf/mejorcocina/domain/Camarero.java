@@ -2,13 +2,12 @@ package com.mf.mejorcocina.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Camarero {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue
 	private long idCamarero;
 	private String nombre;
 	private String apellido1;

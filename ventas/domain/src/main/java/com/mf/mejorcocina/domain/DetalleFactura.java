@@ -2,17 +2,15 @@ package com.mf.mejorcocina.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class DetalleFactura {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue
 	private long idDetalleFactura;
 	private long idFactura;
-	private long idCocinero;
-	private String plato;
+	private long idPlato;
 	private double importe;
 
 	public long getIdDetalleFactura() {
@@ -31,20 +29,12 @@ public class DetalleFactura {
 		this.idFactura = idFactura;
 	}
 
-	public long getIdCocinero() {
-		return idCocinero;
+	public long getIdPlato() {
+		return idPlato;
 	}
 
-	public void setIdCocinero(long idCocinero) {
-		this.idCocinero = idCocinero;
-	}
-
-	public String getPlato() {
-		return plato;
-	}
-
-	public void setPlato(String plato) {
-		this.plato = plato;
+	public void setIdPlato(long idPlato) {
+		this.idPlato = idPlato;
 	}
 
 	public double getImporte() {
@@ -57,7 +47,7 @@ public class DetalleFactura {
 
 	@Override
 	public String toString() {
-		return "DetalleFactura [IdDetalleFactura=" + idDetalleFactura + ", IdFactura=" + idFactura + ", IdCocinero="
-				+ idCocinero + ", Plato=" + plato + ", Importe=" + importe + "]";
+		return "DetalleFactura [IdDetalleFactura=" + idDetalleFactura + ", IdFactura=" + idFactura + ", IdPlato="
+				+ idPlato + ", Importe=" + importe + "]";
 	}
 }
