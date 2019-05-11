@@ -11,9 +11,9 @@
 	<groupId>com.marinfrancisco</groupId>
 	<artifactId>ventas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+<!-- 	<packaging>pom</packaging> -->
 	<name>ventas</name>
-	<description>Aplicación que permita registrar las facturas de las ventas realizadas en el restaurante “LA MEJOR COCINA”</description>
+	<description>Aplicación que permita registrar las facturas de las ventas realizadas en el restaurante LA MEJOR COCINA</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -42,21 +42,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.mf.mejorcocina</groupId>
-			<artifactId>business</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mf.mejorcocina</groupId>
-			<artifactId>dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mf.mejorcocina</groupId>
-			<artifactId>domain</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
+<!-- 			<artifactId>business</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
+<!-- 			<artifactId>dao</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
+<!-- 			<artifactId>domain</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 	<build>
@@ -68,9 +68,9 @@
 		</plugins>
 	</build>
 
-	<modules>
-		<module>business</module>
-		<module>dao</module>
-		<module>domain</module>
-	</modules>
+<!-- 	<modules> -->
+<!-- 		<module>business</module> -->
+<!-- 		<module>dao</module> -->
+<!-- 		<module>domain</module> -->
+<!-- 	</modules> -->
 </project>
