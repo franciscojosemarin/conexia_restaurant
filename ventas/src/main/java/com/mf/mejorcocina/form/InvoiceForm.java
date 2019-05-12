@@ -1,9 +1,12 @@
 package com.mf.mejorcocina.form;
 
+import java.util.List;
+
 public class InvoiceForm {
 	private String cliente;
 	private String camarero;
 	private String mesa;
+	private List<DetalleForm> platos;
 
 	public InvoiceForm() {
 		super();
@@ -33,8 +36,17 @@ public class InvoiceForm {
 		this.mesa = mesa;
 	}
 
+	public List<DetalleForm> getPlatos() {
+		return platos;
+	}
+
+	public void setPlatos(List<DetalleForm> platos) {
+		this.platos = platos;
+	}
+
 	@Override
 	public String toString() {
-		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + "]";
+		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + ", platos=" + platos
+				+ "]";
 	}
 }

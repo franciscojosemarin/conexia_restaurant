@@ -46,21 +46,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.mf.mejorcocina</groupId> -->
-		<!-- <artifactId>business</artifactId> -->
-		<!-- <version>0.0.1-SNAPSHOT</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.mf.mejorcocina</groupId> -->
-		<!-- <artifactId>dao</artifactId> -->
-		<!-- <version>0.0.1-SNAPSHOT</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.mf.mejorcocina</groupId> -->
-		<!-- <artifactId>domain</artifactId> -->
-		<!-- <version>0.0.1-SNAPSHOT</version> -->
-		<!-- </dependency> -->
 	</dependencies>
 
 	<build>
@@ -71,10 +56,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<!-- <modules> -->
-	<!-- <module>business</module> -->
-	<!-- <module>dao</module> -->
-	<!-- <module>domain</module> -->
-	<!-- </modules> -->
 </project>

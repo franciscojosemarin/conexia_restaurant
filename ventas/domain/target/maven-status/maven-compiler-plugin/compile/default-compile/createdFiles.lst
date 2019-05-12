@@ -1,7 +1,0 @@
-com\mf\mejorcocina\domain\Cocinero.class
-com\mf\mejorcocina\domain\Plato.class
-com\mf\mejorcocina\domain\Mesa.class
-com\mf\mejorcocina\domain\Cliente.class
-com\mf\mejorcocina\domain\Factura.class
-com\mf\mejorcocina\domain\Camarero.class
-com\mf\mejorcocina\domain\DetalleFactura.class

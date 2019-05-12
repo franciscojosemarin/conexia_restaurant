@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mf.mejorcocina.dao.DetalleFacturaRepo;
 import com.mf.mejorcocina.dao.FacturaRepo;
+import com.mf.mejorcocina.form.InvoiceForm;
 
 @Service
 public class InvoiceService implements InvoiceServiceFacade {
@@ -12,4 +13,10 @@ public class InvoiceService implements InvoiceServiceFacade {
 	FacturaRepo factRepo;
 	@Autowired
 	DetalleFacturaRepo detFactRepo;
+
+	@Override
+	public int save(InvoiceForm invoice) {
+
+		return 200;
+	}
 }
