@@ -1,5 +1,7 @@
 package com.mf.mejorcocina.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mf.mejorcocina.dao.CamareroRepo;
+import com.mf.mejorcocina.dao.ClienteRepo;
 import com.mf.mejorcocina.domain.Camarero;
+import com.mf.mejorcocina.domain.Cliente;
 import com.mf.mejorcocina.form.InvoiceForm;
 
 @Controller
@@ -18,6 +22,8 @@ public class MainController {
 
 	@Autowired
 	CamareroRepo camaRepo;
+	@Autowired
+	ClienteRepo clientRepo;
 //	InvoiceServiceFacade invoiceService;
 	// @Autowired
 	// ClienteRepo clienteRepo;
@@ -40,6 +46,14 @@ public class MainController {
 	public String report1() {
 		System.out.println("report1");
 		return "report1";
+	}
+
+	@RequestMapping(value = "/report2", method = RequestMethod.GET)
+	public String report2(Model model) {
+		System.out.println("report2");
+		List<Cliente> clients = clientRepo.getClientesDerrochadores(100000.0);
+
+		return "report2";
 	}
 
 	@RequestMapping(value = "/invoice", method = RequestMethod.GET)
