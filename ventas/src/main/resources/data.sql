@@ -1,0 +1,2 @@
+insert into CAMARERO (ID_CAMARERO, nombre, apellido1, apellido2) values(1, 'Francisco','Marin','Amundarain');
+insert into CAMARERO (ID_CAMARERO, nombre, apellido1, apellido2) values(2, 'Nelson','Boada','Velazquez');

@@ -11,7 +11,7 @@
 	<groupId>com.marinfrancisco</groupId>
 	<artifactId>ventas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-<!-- 	<packaging>pom</packaging> -->
+	<!-- <packaging>pom</packaging> -->
 	<name>ventas</name>
 	<description>Aplicación que permita registrar las facturas de las ventas realizadas en el restaurante LA MEJOR COCINA</description>
 
@@ -26,13 +26,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.tomcat</groupId> -->
-<!-- 			<artifactId>tomcat-jasper</artifactId> -->
-<!-- 			<version>8.5.30</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper</artifactId>
+			<version>8.5.30</version>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -42,21 +46,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
-<!-- 			<artifactId>business</artifactId> -->
-<!-- 			<version>0.0.1-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
-<!-- 			<artifactId>dao</artifactId> -->
-<!-- 			<version>0.0.1-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.mf.mejorcocina</groupId> -->
-<!-- 			<artifactId>domain</artifactId> -->
-<!-- 			<version>0.0.1-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.mf.mejorcocina</groupId> -->
+		<!-- <artifactId>business</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.mf.mejorcocina</groupId> -->
+		<!-- <artifactId>dao</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.mf.mejorcocina</groupId> -->
+		<!-- <artifactId>domain</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 
 	<build>
@@ -68,9 +72,9 @@
 		</plugins>
 	</build>
 
-<!-- 	<modules> -->
-<!-- 		<module>business</module> -->
-<!-- 		<module>dao</module> -->
-<!-- 		<module>domain</module> -->
-<!-- 	</modules> -->
+	<!-- <modules> -->
+	<!-- <module>business</module> -->
+	<!-- <module>dao</module> -->
+	<!-- <module>domain</module> -->
+	<!-- </modules> -->
 </project>
