@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" -->
+<!-- 	pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -26,11 +26,11 @@
 			<div class="col-md-12 text-center">
 				<form th:action="@{/invoice}" th:object="${invoiceForm}" method="post">
 					<label for="cliente">Cliente:</label>
-					<input id="cliente" placeholder="Cliente" type="text" />
+					<input id="cliente" name="cliente" placeholder="Cliente" type="text" />
 					<label for="camarero">Camarero:</label>
-					<input id="camarero" placeholder="Camarero" type="text" />
+					<input id="camarero" name="camarero" placeholder="Camarero" type="text" />
 					<label for="mesa">Mesa:</label>
-					<input id="mesa" placeholder="Mesa"	type="text" />
+					<input id="mesa" name="mesa" placeholder="Mesa"	type="text" />
 					<input type="submit" value="Submit" id="button-1" />
 				</form>
 			</div>

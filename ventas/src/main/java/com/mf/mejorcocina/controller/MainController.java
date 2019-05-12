@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mf.mejorcocina.dao.CamareroRepo;
+import com.mf.mejorcocina.domain.Camarero;
 import com.mf.mejorcocina.form.InvoiceForm;
 
 @Controller
@@ -51,6 +52,11 @@ public class MainController {
 	public String invoiceForm(@ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
 		System.out.println("invoice");
 		System.out.println(invoice);
+		Camarero nuevo = new Camarero();
+		nuevo.setNombre(invoice.getCliente());
+		nuevo.setApellido1(invoice.getCamarero());
+		nuevo.setApellido2(invoice.getMesa());
+		camaRepo.save(nuevo);
 		mod.addAttribute("joda", "aqui");
 		return "invoice";
 	}
