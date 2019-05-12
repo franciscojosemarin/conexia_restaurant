@@ -81,12 +81,29 @@ public class MainController {
 	@RequestMapping(value = "/invoice", method = RequestMethod.POST)
 	public String invoiceForm(@ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
 		System.out.println(invoice);
-//		Camarero nuevo = new Camarero();
-//		nuevo.setNombre(invoice.getCliente());
-//		nuevo.setApellido1(invoice.getCamarero());
-//		nuevo.setApellido2(invoice.getMesa());
-//		camaRepo.save(nuevo);
 		invoiceServs.save(invoice);
+		mod.addAttribute("waiters", camaRepo.findAll());
+		mod.addAttribute("clients", clientRepo.findAll());
+		mod.addAttribute("tables", mesaRepo.findAll());
+		mod.addAttribute("dishes", platoRepo.findAll());
+		return "invoice";
+	}
+	
+	@RequestMapping(value = "/invoiceDetail", method = RequestMethod.POST)
+	public String invoiceFormDetaiil(@ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
+		System.out.println(invoice);
+		
+		List<DetalleForm> detalles = new ArrayList<>();
+		DetalleForm e = new DetalleForm();
+		e.setIdPlato(invoice.getDishs());
+		e.setPlato("Caviar");
+		e.setImporte(invoice.getImporte());
+		detalles.add(e);
+		mod.addAttribute("waiters", camaRepo.findAll());
+		mod.addAttribute("clients", clientRepo.findAll());
+		mod.addAttribute("tables", mesaRepo.findAll());
+		mod.addAttribute("dishes", platoRepo.findAll());
+		mod.addAttribute("detalles", detalles);
 		return "invoice";
 	}
 }

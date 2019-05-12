@@ -6,6 +6,8 @@ public class InvoiceForm {
 	private String cliente;
 	private String camarero;
 	private String mesa;
+	private String dishs;
+	private String importe;
 	private List<DetalleForm> platos;
 
 	public InvoiceForm() {
@@ -36,6 +38,22 @@ public class InvoiceForm {
 		this.mesa = mesa;
 	}
 
+	public String getDishs() {
+		return dishs;
+	}
+
+	public void setDishs(String dishs) {
+		this.dishs = dishs;
+	}
+
+	public String getImporte() {
+		return importe;
+	}
+
+	public void setImporte(String importe) {
+		this.importe = importe;
+	}
+
 	public List<DetalleForm> getPlatos() {
 		return platos;
 	}
@@ -46,7 +64,8 @@ public class InvoiceForm {
 
 	@Override
 	public String toString() {
-		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + ", platos=" + platos
-				+ "]";
+		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + ", dishs=" + dishs
+				+ ", importe=" + importe + ", platos=" + platos + "]";
 	}
+
 }

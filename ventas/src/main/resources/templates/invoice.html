@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<form th:action="@{/invoice}" th:object="${invoiceForm}" method="post">
+				<form id="invoice" name="invoice" th:action="@{/invoice}" th:object="${invoiceForm}" method="post">
 					<label for="cliente">Cliente:</label>
 					<select id="cliente" name="cliente" >
 						<option id="0">Seleccione...</option>
@@ -40,12 +40,13 @@
 						<option th:each="table : ${tables}" th:value="${table.idMesa}" th:text="${table.ubicacion}"></option>
 					</select>
 					<input type="submit" value="Guardar Factura" id="btnSave" />
-					<table class="table table-striped table-bordered table-condensed" id="platosAdd" name="platosAdd">
+					<form id="detail" name="detail" th:action="@{/invoiceDetail}" th:object="${invoiceForm}" method="post">
+					<table class="table table-striped table-bordered table-condensed" id="platoAdd" name="platoAdd">
 						<thead>
 							<tr>
 								<th>PLATO</th>
 								<th>IMPORTE</th>
-								<th><input type="button" value="Agregar" id="newPlate" name="newPlate" /></th>
+								<th><input type="button" value="Agregar" id="newDish" name="newDish" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -56,7 +57,7 @@
 									<option th:each="dish : ${dishes}" th:value="${dish.idPlato}" th:text="${dish.nombre}" th:data="${dish.importe}"></option>
 								</select>
 								</td>
-								<td><input type="text" id="importe"></td>
+								<td><input type="text" id="importe" name="importe"></td>
 								<td></td>
 							</tr>
 						</tbody>
@@ -79,6 +80,7 @@
 						</tr>
 						</tbody>
 					</table>
+					</form>
 				</form>
 			</div>
 		</div>
