@@ -3,6 +3,8 @@ package com.mf.mejorcocina.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,70 +42,50 @@ public class MainController {
 	@Autowired
 	InvoiceServiceFacade invoiceServs;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home() {
 		return "home";
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@GetMapping(value = "/home")
 	public String home2() {
 		return "home";
 	}
 
-	@RequestMapping(value = "/report1", method = RequestMethod.GET)
+	@GetMapping(value = "/report1")
 	public String report1(Model mod) {
 		mod.addAttribute("waiters", reportServs.getReport1());
 		return "report1";
 	}
 
-	@RequestMapping(value = "/report2", method = RequestMethod.GET)
+	@GetMapping(value = "/report2")
 	public String report2(Model mod) {
 		mod.addAttribute("clients", reportServs.getReport2());
 		return "report2";
 	}
 
-	@RequestMapping(value = "/invoice", method = RequestMethod.GET)
+	@GetMapping(value = "/invoice")
 	public String invoice(Model mod) {
+		InvoiceForm invoice = new InvoiceForm();
+		invoice = invoiceServs.loadCollections(invoice);
 		List<DetalleForm> detalles = new ArrayList<>();
 		DetalleForm e = new DetalleForm();
 		e.setIdPlato("1");
 		e.setPlato("Caviar");
 		e.setImporte("100000");
 		detalles.add(e);
-		mod.addAttribute("waiters", camaRepo.findAll());
-		mod.addAttribute("clients", clientRepo.findAll());
-		mod.addAttribute("tables", mesaRepo.findAll());
-		mod.addAttribute("dishes", platoRepo.findAll());
+		mod.addAttribute("invoiceForm", invoice);
 		mod.addAttribute("detalles", detalles);
 		return "invoice";
 	}
 
-	@RequestMapping(value = "/invoice", method = RequestMethod.POST)
-	public String invoiceForm(@ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
+	@PostMapping(value = "/invoice")
+	public String invoiceForm(@Valid @ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
 		System.out.println(invoice);
 		invoiceServs.save(invoice);
-		mod.addAttribute("waiters", camaRepo.findAll());
-		mod.addAttribute("clients", clientRepo.findAll());
-		mod.addAttribute("tables", mesaRepo.findAll());
-		mod.addAttribute("dishes", platoRepo.findAll());
+		invoice = invoiceServs.loadCollections(invoice);
+		mod.addAttribute("invoiceForm", invoice);
 		return "invoice";
 	}
-	
-	@RequestMapping(value = "/invoiceDetail", method = RequestMethod.POST)
-	public String invoiceFormDetaiil(@ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
-		System.out.println(invoice);
-		
-		List<DetalleForm> detalles = new ArrayList<>();
-		DetalleForm e = new DetalleForm();
-		e.setIdPlato(invoice.getDishs());
-		e.setPlato("Caviar");
-		e.setImporte(invoice.getImporte());
-		detalles.add(e);
-		mod.addAttribute("waiters", camaRepo.findAll());
-		mod.addAttribute("clients", clientRepo.findAll());
-		mod.addAttribute("tables", mesaRepo.findAll());
-		mod.addAttribute("dishes", platoRepo.findAll());
-		mod.addAttribute("detalles", detalles);
-		return "invoice";
-	}
+
 }

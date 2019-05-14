@@ -26,21 +26,20 @@
 				<form id="invoice" name="invoice" th:action="@{/invoice}" th:object="${invoiceForm}" method="post">
 					<label for="cliente">Cliente:</label>
 					<select id="cliente" name="cliente" >
-						<option id="0">Seleccione...</option>
-						<option th:each="client : ${clients}" th:value="${client.idCliente}" th:text="${client.nombre+' '+client.apellido1+' '+client.apellido2}"></option>
+						<option value="null">Seleccione...</option>
+						<option th:each="client : ${invoiceForm.clients}" th:value="${client.idCliente}" th:text="${client.nombre+' '+client.apellido1+' '+client.apellido2}"></option>
 					</select>
 					<label for="camarero">Camarero:</label>
-					<select id="camarero" name="camarero" >
-						<option id="0">Seleccione...</option>
-						<option th:each="waiter : ${waiters}" th:value="${waiter.idCamarero}" th:text="${waiter.nombre+' '+waiter.apellido1+' '+waiter.apellido2}"></option>
+					<select id="invoiceForm.camarero" name="camarero" >
+						<option value="null">Seleccione...</option>
+						<option th:each="waiter : ${invoiceForm.waiters}" th:value="${waiter.idCamarero}" th:text="${waiter.nombre+' '+waiter.apellido1+' '+waiter.apellido2}"></option>
 					</select>
 					<label for="mesa">Mesa:</label>
 					<select id="mesa" name="mesa" >
-						<option id="0">Seleccione...</option>
-						<option th:each="table : ${tables}" th:value="${table.idMesa}" th:text="${table.ubicacion}"></option>
+						<option value="null">Seleccione...</option>
+						<option th:each="table : ${invoiceForm.tables}" th:value="${table.idMesa}" th:text="${table.ubicacion}"></option>
 					</select>
 					<input type="submit" value="Guardar Factura" id="btnSave" />
-					<form id="detail" name="detail" th:action="@{/invoiceDetail}" th:object="${invoiceForm}" method="post">
 					<table class="table table-striped table-bordered table-condensed" id="platoAdd" name="platoAdd">
 						<thead>
 							<tr>
@@ -53,8 +52,8 @@
 							<tr>
 								<td>
 								<select id="dishs" name="dishs" onchange="showImport(this)">
-									<option id="0">Seleccione...</option>
-									<option th:each="dish : ${dishes}" th:value="${dish.idPlato}" th:text="${dish.nombre}" th:data="${dish.importe}"></option>
+									<option value="null">Seleccione...</option>
+									<option th:each="dish : ${invoiceForm.dishes}" th:value="${dish.idPlato}" th:text="${dish.nombre}" th:data="${dish.importe}"></option>
 								</select>
 								</td>
 								<td><input type="text" id="importe" name="importe"></td>
@@ -80,7 +79,6 @@
 						</tr>
 						</tbody>
 					</table>
-					</form>
 				</form>
 			</div>
 		</div>

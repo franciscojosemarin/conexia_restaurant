@@ -6,4 +6,6 @@ public interface InvoiceServiceFacade {
 
 	int save(InvoiceForm invoice);
 
+	InvoiceForm loadCollections(InvoiceForm frm);
+
 }
