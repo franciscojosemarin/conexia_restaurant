@@ -2,6 +2,7 @@ PRUEBA CONEXIA restaurante “LA MEJOR COCINA”.
 
 Se utilizaron las siguientes opciones para realizar la prueba
 * El framework de desarrollo Spring Boot. 
+* El manejador de plantillas Thymeleaf
 * Como manejador de Base de Datos: H2 Database, se incorpora script de creacion de datos en la BD. Solo es necesario iniciar la aplicacion para crear la BD e instanciar los datos.
 * Maven como manejador de paquetes.
 * En el archivo application.properties estan las configuraciones del sistema.
