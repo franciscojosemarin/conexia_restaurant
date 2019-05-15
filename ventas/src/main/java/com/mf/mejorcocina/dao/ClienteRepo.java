@@ -10,8 +10,8 @@ import com.mf.mejorcocina.domain.Cliente;
 
 @Repository
 public interface ClienteRepo extends CrudRepository<Cliente, Long> {
-	@Query("SELECT C FROM Cliente C WHERE C.idCliente IN ("
-			+ "SELECT F.idCliente FROM Factura F "
+
+	@Query("SELECT C FROM Cliente C WHERE C.idCliente IN (SELECT F.idCliente FROM Factura F "
 			+ "INNER JOIN DetalleFactura df ON df.idFactura = F.idFactura "
 			+ " GROUP BY F.idCliente HAVING SUM(df.importe) > ?1)")
 	public List<Cliente> getClientesDerrochadores(Double monto);

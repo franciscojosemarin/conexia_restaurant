@@ -54,7 +54,7 @@ public class MainController {
 
 	@GetMapping(value = "/report1")
 	public String report1(Model mod) {
-		mod.addAttribute("waiters", reportServs.getReport1());
+		mod.addAttribute("months", reportServs.getReport1());
 		return "report1";
 	}
 

@@ -1,55 +1,29 @@
 package com.mf.mejorcocina.form;
 
+import java.util.List;
+
 public class Report1Form {
-	private Long idCamarero;
-	private String nombre;
-	private String apellidos;
-	private String mes;
-	private Double facturado;
+	private String month;
+	private List<Report1DetalleForm> waiters;
 
-	public Long getIdCamarero() {
-		return idCamarero;
+	public String getMonth() {
+		return month;
 	}
 
-	public void setIdCamarero(Long idCamarero) {
-		this.idCamarero = idCamarero;
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public List<Report1DetalleForm> getWaiters() {
+		return waiters;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public String getMes() {
-		return mes;
-	}
-
-	public void setMes(String mes) {
-		this.mes = mes;
-	}
-
-	public Double getFacturado() {
-		return facturado;
-	}
-
-	public void setFacturado(Double facturado) {
-		this.facturado = facturado;
+	public void setWaiters(List<Report1DetalleForm> waiters) {
+		this.waiters = waiters;
 	}
 
 	@Override
 	public String toString() {
-		return "Report1Form [idCamarero=" + idCamarero + ", nombre=" + nombre + ", apellidos=" + apellidos + ", mes="
-				+ mes + ", facturado=" + facturado + "]";
+		return "Report1Form [month=" + month + ", waiters=" + waiters + "]";
 	}
 }
