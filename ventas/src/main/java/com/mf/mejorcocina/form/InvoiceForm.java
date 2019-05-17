@@ -10,11 +10,11 @@ import com.mf.mejorcocina.domain.Mesa;
 import com.mf.mejorcocina.domain.Plato;
 
 public class InvoiceForm {
-	@NotNull
+	@NotNull(message = "Debe seleccionar un Cliente")
 	private String cliente;
-	@NotNull
+	@NotNull(message = "Debe seleccionar un Camarero")
 	private String camarero;
-	@NotNull
+	@NotNull(message = "Debe seleccionar una Mesa")
 	private String mesa;
 
 	private String dishs;

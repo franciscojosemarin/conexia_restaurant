@@ -8,21 +8,17 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mf.mejorcocina.business.InvoiceServiceFacade;
-import com.mf.mejorcocina.business.ReportsService;
 import com.mf.mejorcocina.business.ReportsServiceFacade;
 import com.mf.mejorcocina.dao.CamareroRepo;
 import com.mf.mejorcocina.dao.ClienteRepo;
 import com.mf.mejorcocina.dao.MesaRepo;
 import com.mf.mejorcocina.dao.PlatoRepo;
-import com.mf.mejorcocina.domain.Camarero;
-import com.mf.mejorcocina.domain.Cliente;
 import com.mf.mejorcocina.form.DetalleForm;
 import com.mf.mejorcocina.form.InvoiceForm;
 
@@ -79,12 +75,13 @@ public class MainController {
 		return "invoice";
 	}
 
-	@PostMapping(value = "/invoice")
-	public String invoiceForm(@Valid @ModelAttribute(name = "invoiceForm") InvoiceForm invoice, Model mod) {
-		System.out.println(invoice);
-		invoiceServs.save(invoice);
-		invoice = invoiceServs.loadCollections(invoice);
-		mod.addAttribute("invoiceForm", invoice);
+	@PostMapping(value = "/invoice")//@ModelAttribute(name = "invoiceForm")
+	public String invoiceForm(@Valid InvoiceForm invoiceForm, Errors errs, Model mod) {
+		System.out.println(invoiceForm);
+		System.out.println(errs);
+		invoiceServs.save(invoiceForm);
+		invoiceForm = invoiceServs.loadCollections(invoiceForm);
+		mod.addAttribute("invoiceForm", invoiceForm);
 		return "invoice";
 	}
 
