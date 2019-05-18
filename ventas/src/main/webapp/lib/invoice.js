@@ -17,8 +17,9 @@ $(document).ready(function() {
 		showImport();
 	});
 	$('#btnSave').click(function() {
+		hideMessages();
 		$("#btnSave").attr("disabled", true);
-		formData = {
+		var formData = {
 			'cliente' : $("#cliente").val(),
 			'camarero' : $("#camarero").val(),
 			'mesa' : $("#mesa").val(),
@@ -33,13 +34,18 @@ $(document).ready(function() {
 			type : 'POST',
 			success : function(data) {
 				$('#btnSave').prop('disabled', false);
-				resetDish();
+				showMessage(data);
+				$('#clnSave').click();
+				setTimeout(hideMessages, 5000);
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				$('#btnSave').prop('disabled', false);
 				showErrors(jqXHR);
 			}
 		});
+	});
+	$('#clnSave').click(function() {
+		$("#platos tbody").empty();
 	});
 });
 function activateDishs() {
@@ -65,22 +71,18 @@ function addDish() {
 	$("#platos tbody")
 			.append(
 					"<tr>"
-							+ "<td>"
-							+ $("#dishs").val()
-							+ "</td>"
-							+ "<td>"
-							+ $("#dishs").children("option:selected").text()
-							+ "</td>"
-							+ "<td>"
-							+ $("#importe").val()
-							+ "</td>"
-							+ "<td>"
+						+ "<td>" + $("#dishs").val() + "</td>"
+						+ "<td>" + $("#dishs").children("option:selected").text() + "</td>"
+						+ "<td>" + $("#importe").val() + "</td>"
+						+ "<td>"
 							+ "<button type='button' title='Editar' onclick='edtDish(this);' class='btn btn-sm btn-warning'>"
 							+ "<span class='glyphicon glyphicon-pencil'/>"
 							+ "</button>"
 							+ "<button type='button' title='Eliminar' onclick='delDish(this);' class='btn btn-sm btn-danger'>"
 							+ "<span class='glyphicon glyphicon-trash'/>"
-							+ "</button>" + "</td>" + "</tr>");
+							+ "</button>"
+						+ "</td>"
+				+ "</tr>");
 	calCosts();
 	var dish = {
 		idPlato : $("#dishs").val(),
@@ -88,9 +90,9 @@ function addDish() {
 		importe : $("#importe").val()
 	};
 	dishes.push(dish);
-	console.log(dishes);
 }
 function edtDish(obj) {
+	console.log(obj);
 	$("#newDish").children("span").removeClass("glyphicon-plus").addClass(
 			"glyphicon-pencil").attr("title", "Editar");
 	modDish = obj;
@@ -101,7 +103,9 @@ function edtDish(obj) {
 	activateDishs();
 }
 function delDish(obj) {
-	$(obj).parents("tr").remove();
+	$(obj).parents("tr").each(function() {
+		dishes.splice(this.rowIndex - 1, 1)
+	}).remove();
 	calCosts();
 }
 function calCosts() {
@@ -111,13 +115,23 @@ function calCosts() {
 	});
 	$("#costs").val(costs);
 }
-function showError(jqXHR){
-	if(jqXHR.status != 406){
+function hideMessages() {
+	$(".alert").addClass('hide');
+}
+function showMessage(data) {
+	$("#msg_success").text(data.message).removeClass('hide');
+}
+function showErrors(jqXHR) {
+	if (jqXHR.status != 406) {
 		console.log(jqXHR);
 		console.log(textStatus);
 		console.log(errorThrown);
 		return;
 	}
 	var errors = JSON.parse(jqXHR.responseText);
-	
+	for ( const error in errors) {
+		for ( const key in errors[error]) {
+			$("#msg_" + key).text(errors[error][key]).removeClass('hide');
+		}
+	}
 }
