@@ -1,16 +1,19 @@
 package com.mf.mejorcocina.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.mf.mejorcocina.business.InvoiceServiceFacade;
@@ -19,7 +22,6 @@ import com.mf.mejorcocina.dao.CamareroRepo;
 import com.mf.mejorcocina.dao.ClienteRepo;
 import com.mf.mejorcocina.dao.MesaRepo;
 import com.mf.mejorcocina.dao.PlatoRepo;
-import com.mf.mejorcocina.form.DetalleForm;
 import com.mf.mejorcocina.form.InvoiceForm;
 
 @Controller
@@ -64,25 +66,42 @@ public class MainController {
 	public String invoice(Model mod) {
 		InvoiceForm invoice = new InvoiceForm();
 		invoice = invoiceServs.loadCollections(invoice);
-		List<DetalleForm> detalles = new ArrayList<>();
-		DetalleForm e = new DetalleForm();
-		e.setIdPlato("1");
-		e.setPlato("Caviar");
-		e.setImporte("100000");
-		detalles.add(e);
 		mod.addAttribute("invoiceForm", invoice);
-		mod.addAttribute("detalles", detalles);
 		return "invoice";
 	}
 
-	@PostMapping(value = "/invoice")//@ModelAttribute(name = "invoiceForm")
-	public String invoiceForm(@Valid InvoiceForm invoiceForm, Errors errs, Model mod) {
+//	@PostMapping(value = "/invoice") // @ModelAttribute(name = "invoiceForm"), consumes = MediaType.APPLICATION_JSON_VALUE  @RequestBody
+	@PostMapping(value = "/invoice")
+	public ResponseEntity<String> invoiceForm(@Valid InvoiceForm invoiceForm, Errors errs, Model mod) {
 		System.out.println(invoiceForm);
 		System.out.println(errs);
-		invoiceServs.save(invoiceForm);
+		String response = "";
+		if (!errs.hasErrors()) {
+			invoiceServs.save(invoiceForm);
+			mod.addAttribute("message", "Factura Guardada Satifactoriamente...");
+		} else {
+			Set<String> resp2 = new HashSet<>();
+
+			for (ObjectError err : errs.getAllErrors()) {
+				FieldError fe = (FieldError) err;
+				resp2.add("{\"" + fe.getField() + "\":\"" + fe.getDefaultMessage() + "\"}");
+			}
+
+			response += "[";
+			boolean ini = true;
+			for (String str : resp2) {
+				response += (ini ? "" : ",") + str;
+				if (ini)
+					ini = false;
+			}
+			response += "]";
+
+			return new ResponseEntity<String>(response, HttpStatus.NOT_ACCEPTABLE);
+		}
 		invoiceForm = invoiceServs.loadCollections(invoiceForm);
 		mod.addAttribute("invoiceForm", invoiceForm);
-		return "invoice";
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+//		return "invoice";
 	}
 
 }

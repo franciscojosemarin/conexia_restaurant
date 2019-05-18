@@ -23,24 +23,46 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
+				<p th:if="${message != null}" th:text="*{message}" class="alert alert-success"></p>
 				<form id="invoice" name="invoice" th:action="@{/invoice}" th:object="${invoiceForm}" method="post">
-					<label for="cliente">Cliente:</label>
-					<select id="cliente" name="cliente" >
-						<option value="null">Seleccione...</option>
-						<option th:each="client : ${invoiceForm.clients}" th:value="${client.idCliente}" th:text="${client.nombre+' '+client.apellido1+' '+client.apellido2}"></option>
-					</select>
-					<label for="camarero">Camarero:</label>
-					<select id="invoiceForm.camarero" name="camarero" >
-						<option value="null">Seleccione...</option>
-						<option th:each="waiter : ${invoiceForm.waiters}" th:value="${waiter.idCamarero}" th:text="${waiter.nombre+' '+waiter.apellido1+' '+waiter.apellido2}"></option>
-					</select>
-					<label for="mesa">Mesa:</label>
-					<select id="mesa" name="mesa" >
-						<option value="null">Seleccione...</option>
-						<option th:each="table : ${invoiceForm.tables}" th:value="${table.idMesa}" th:text="${table.ubicacion}"></option>
-					</select>
-					<button type="submit" title="Guardar Factura" id="btnSave"><span class='glyphicon glyphicon-floppy-disk' /></button>
-					<br><br>
+					<table class="table">
+					<thead>
+						<tr>
+							<th>
+								<label for="cliente">Cliente:</label>
+								<select id="cliente" name="cliente" th:field="*{cliente}">
+									<option th:value="${null}">Seleccione...</option>
+									<option th:each="client : ${invoiceForm.clients}" th:value="${client.idCliente}"
+											th:text="${client.nombre+' '+client.apellido1+' '+client.apellido2}"></option>
+								</select>
+								<p th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}" class="alert alert-danger"></p>
+							</th>
+							<th>
+								<label for="camarero">Camarero:</label>
+								<select id="camarero" name="camarero" th:field="*{camarero}">
+									<option th:value="${null}">Seleccione...</option>
+									<option th:each="waiter : ${invoiceForm.waiters}" th:value="${waiter.idCamarero}"
+										th:text="${waiter.nombre+' '+waiter.apellido1+' '+waiter.apellido2}"></option>
+								</select>
+								<p th:if="${#fields.hasErrors('camarero')}" th:errors="*{camarero}" class="alert alert-danger"></p>
+							</th>
+							<th>
+								<label for="mesa">Mesa:</label>
+								<select id="mesa" name="mesa" th:field="*{mesa}">
+									<option th:value="${null}">Seleccione...</option>
+									<option th:each="table : ${invoiceForm.tables}"
+										th:value="${table.idMesa}" th:text="${table.ubicacion}"></option>
+								</select>
+								<p th:if="${#fields.hasErrors('mesa')}" th:errors="*{mesa}" class="alert alert-danger"></p>
+							</th>
+							<th>
+								<button type="button" title="Guardar Factura" id="btnSave" class="btn btn-primary">
+									<span class='glyphicon glyphicon-floppy-disk' />
+								</button>
+							</th>
+						</tr>
+					</thead>
+					</table>
 					<table class="table table-striped table-bordered table-condensed" id="platoAdd" name="platoAdd">
 						<thead>
 							<tr>
@@ -53,16 +75,16 @@
 							<tr>
 								<td>
 								<select id="dishs" name="dishs">
-									<option value="null">Seleccione...</option>
+									<option th:value="${null}">Seleccione...</option>
 									<option th:each="dish : ${invoiceForm.dishes}" th:value="${dish.idPlato}" th:text="${dish.nombre}" th:data="${dish.importe}"></option>
 								</select>
 								</td>
 								<td>
 									<input type="text" id="importe" name="importe">
-									<button type="button" title="Agregar" id="newDish" name="newDish">
+									<button type="button" title="Agregar" id="newDish" name="newDish" class="btn btn-sm btn-info">
 										<span class='glyphicon glyphicon-plus' />
 									</button>
-									<button type="button" title="Limpiar" id="cleanDish" name="cleanDish">
+									<button type="button" title="Limpiar" id="cleanDish" name="cleanDish" class="btn btn-sm btn-success">
 										<span class='glyphicon glyphicon-repeat' />
 									</button>
 								</td>
@@ -70,7 +92,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table table-striped table-bordered table-condensed" id="platos" name="platos">
+					<table class="table table-striped table-bordered table-condensed" id="platos" name="platos" th:field="*{platos}">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -80,13 +102,17 @@
 							</tr>
 						</thead>
 						<tbody>
-						<tr th:each="detalle : ${detalles}">
-							<td th:text="${detalle.idPlato}">Text ...</td>
-							<td th:text="${detalle.plato}">Text ...</td>
-							<td th:text="${detalle.importe}">Text ...</td>
+						<tr th:each="plato : ${invoiceForm.platos}">
+							<td th:text="${plato.idPlato}">Text ...</td>
+							<td th:text="${plato.plato}">Text ...</td>
+							<td th:text="${plato.importe}">Text ...</td>
 							<td>
-								<button type='button' title='Editar' onclick='edtDish(this);' class='btn btn-default'><span class='glyphicon glyphicon-pencil' /></button>
-	        					<button type='button' title='Eliminar' onclick='delDish(this);' class='btn btn-default'><span class='glyphicon glyphicon-trash' /></button>
+								<button type='button' title='Editar' onclick='edtDish(this);' class='btn btn-sm btn-warning'>
+									<span class='glyphicon glyphicon-pencil'/>
+								</button>
+	        					<button type='button' title='Eliminar' onclick='delDish(this);' class='btn btn-sm btn-danger'>
+	        						<span class='glyphicon glyphicon-trash'/>
+        						</button>
         					</td>
 						</tr>
 						</tbody>

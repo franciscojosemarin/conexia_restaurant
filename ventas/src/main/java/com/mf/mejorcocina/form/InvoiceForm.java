@@ -2,6 +2,7 @@ package com.mf.mejorcocina.form;
 
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.mf.mejorcocina.domain.Camarero;
@@ -11,14 +12,15 @@ import com.mf.mejorcocina.domain.Plato;
 
 public class InvoiceForm {
 	@NotNull(message = "Debe seleccionar un Cliente")
+	@NotEmpty(message = "Debe seleccionar un Cliente")
 	private String cliente;
 	@NotNull(message = "Debe seleccionar un Camarero")
+	@NotEmpty(message = "Debe seleccionar un Camarero")
 	private String camarero;
 	@NotNull(message = "Debe seleccionar una Mesa")
+	@NotEmpty(message = "Debe seleccionar una Mesa")
 	private String mesa;
-
-	private String dishs;
-	private String importe;
+	@NotEmpty(message = "Debe agregar por lo menos un plato")
 	private List<DetalleForm> platos;
 
 	private Iterable<Camarero> waiters;
@@ -52,22 +54,6 @@ public class InvoiceForm {
 
 	public void setMesa(String mesa) {
 		this.mesa = mesa;
-	}
-
-	public String getDishs() {
-		return dishs;
-	}
-
-	public void setDishs(String dishs) {
-		this.dishs = dishs;
-	}
-
-	public String getImporte() {
-		return importe;
-	}
-
-	public void setImporte(String importe) {
-		this.importe = importe;
 	}
 
 	public List<DetalleForm> getPlatos() {
@@ -112,8 +98,7 @@ public class InvoiceForm {
 
 	@Override
 	public String toString() {
-		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + ", dishs=" + dishs
-				+ ", importe=" + importe + ", platos=" + platos + "]";
+		return "InvoiceForm [cliente=" + cliente + ", camarero=" + camarero + ", mesa=" + mesa + ", platos=" + platos
+				+ ", waiters=" + waiters + ", clients=" + clients + ", tables=" + tables + ", dishes=" + dishes + "]";
 	}
-
 }

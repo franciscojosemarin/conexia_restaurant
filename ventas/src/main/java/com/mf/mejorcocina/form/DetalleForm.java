@@ -5,6 +5,9 @@ public class DetalleForm {
 	private String plato;
 	private String importe;
 
+	public DetalleForm() {
+	}
+
 	public String getIdPlato() {
 		return idPlato;
 	}
