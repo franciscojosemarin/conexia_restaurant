@@ -119,7 +119,10 @@ function hideMessages() {
 	$(".alert").addClass('hide');
 }
 function showMessage(data) {
-	$("#msg_success").text(data.message).removeClass('hide');
+	if (data.message)
+		$("#msg_success").text(data.message).removeClass('hide');
+	if (data.error)
+		$("#msg_error").text(data.error).removeClass('hide');
 }
 function showErrors(jqXHR) {
 	if (jqXHR.status != 406) {

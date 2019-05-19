@@ -53,36 +53,38 @@ public class MainController {
 
 	@GetMapping(value = "/invoice")
 	public String invoice(Model mod) {
-		InvoiceForm invoice = new InvoiceForm();
-		invoice = invoiceServs.loadCollections(invoice);
-		mod.addAttribute("invoiceForm", invoice);
+		mod.addAttribute("invoiceForm", invoiceServs.loadCollections());
 		return "invoice";
 	}
 
-	@PostMapping(value = "/invoice") 
+	@PostMapping(value = "/invoice")
 	public ResponseEntity<String> invoiceForm(@Valid @RequestBody InvoiceForm invoiceForm, Errors errs, Model mod) {
 //		System.out.println(invoiceForm);
 //		System.out.println(errs);
 		String response = "";
 		if (!errs.hasErrors()) {
-			invoiceServs.save(invoiceForm);
-			response = "{\"message\":\"Factura Guardada Satifactoriamente...\"}";
+			int result = invoiceServs.save(invoiceForm);
+
+			response = "{\"error\":\"Ha ocurrido un error, por favor consulte con el administrador del sistema...\"}";
+			if (result == 200)
+				response = "{\"message\":\"Factura Guardada Satifactoriamente...\"}";
 		} else {
 			Set<String> resp2 = new HashSet<>();
-			
+
 			for (ObjectError err : errs.getAllErrors()) {
 				FieldError fe = (FieldError) err;
 				resp2.add("{\"" + fe.getField() + "\":\"" + fe.getDefaultMessage() + "\"}");
 			}
-			
+
 			response += "[";
 			boolean ini = true;
-			for(String str:resp2) {
+			for (String str : resp2) {
 				response += (ini ? "" : ",") + str;
-				if (ini) ini = false;
+				if (ini)
+					ini = false;
 			}
 			response += "]";
-			
+
 			return new ResponseEntity<String>(response, HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<String>(response, HttpStatus.OK);

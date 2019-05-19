@@ -1,4 +1,4 @@
-package com.marinfrancisco.mejorcocina;
+package com.mf.mejorcocina;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
