@@ -53,7 +53,7 @@ public class ReportsService implements ReportsServiceFacade {
 
 			for (String month : months) {
 				Report1Form m = new Report1Form();
-				m.setMonth(month);
+				m.setMonth(month.substring(0, 4) + " " + getMonth(Integer.parseInt(month.substring(4))));
 				m.setWaiters(new ArrayList<>());
 				for (Camarero waiter : waiters) {
 					Report1DetalleForm c = new Report1DetalleForm();
@@ -89,6 +89,11 @@ public class ReportsService implements ReportsServiceFacade {
 		} catch (Exception e) {
 			return new ArrayList<Cliente>();
 		}
+	}
+
+	private String getMonth(int num) {
+		String[] months = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
+		return months[num - 1];
 	}
 
 }
