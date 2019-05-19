@@ -9,6 +9,7 @@ Se utilizaron las siguientes opciones para realizar la prueba
 Para realizar la ejecucion del sistema se deben tomar las siguientes recomendaciones:
 * Clonar repositorio.
 * Abrir proyecto y ejecutar en STS.
+* Acceder al sistema en la URL http://localhost:8080/.
 
 Consideraciones
 * Se realizo una correccion en el esquema de Base de Datos, esto debido a que 1 Cocinero puede tener mas de 1 Plato, y este no tiene relacion directo con el DetalleFactura por consiguiente se crea la entidad Plato, donde se relaciona con el Cocinero y en DetalleFactura se relaciona con Plato.
