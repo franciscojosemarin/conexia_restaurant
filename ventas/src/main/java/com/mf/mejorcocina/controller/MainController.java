@@ -59,8 +59,6 @@ public class MainController {
 
 	@PostMapping(value = "/invoice")
 	public ResponseEntity<String> invoiceForm(@Valid @RequestBody InvoiceForm invoiceForm, Errors errs, Model mod) {
-//		System.out.println(invoiceForm);
-//		System.out.println(errs);
 		String response = "";
 		if (!errs.hasErrors()) {
 			int result = invoiceServs.save(invoiceForm);
